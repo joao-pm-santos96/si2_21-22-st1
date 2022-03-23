@@ -1,0 +1,3 @@
+[submodule "zincbase"]
+	path = zincbase
+	url = https://github.com/complexdb/zincbase
