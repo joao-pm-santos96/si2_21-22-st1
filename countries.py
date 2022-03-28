@@ -13,7 +13,7 @@ kb.from_csv('./countries_train.csv', delimiter='\t')
 for ans in kb.query('neighbor(slovakia, Country)'):
     print(ans['Country'])
 
-kb.store('capitalofneighor(Z, X) :- neighbor(X, Y), capitalof(Z, Y)')
+kb.store('capitalofneighor(Z, X) :- neighbor(X, Y), capitalof(Z, Y)') # prolog function
 
 for ans in kb.query('capitalofneighor(madrid, Country)'):
     print(ans)
@@ -26,9 +26,8 @@ for ans in kb.query('capitalofneighor(City, germany)'):
 
 kb.build_kg_model(cuda=False, embedding_size=40)
 kb.train_kg_model(steps=4000, batch_size=1, verbose=True)
-kb.get_most_likely('austria', 'neighbor', '?', k=2) # doctest:+ELLIPSIS
-kb.get_most_likely('?', 'neighbor', 'austria', candidates=list(kb.entities), k=2)
-kb.get_most_likely('austria', '?', 'germany', k=3)
+print(kb.get_most_likely('austria', 'neighbor', '?', k=2)) # doctest:+ELLIPSIS
+print(kb.get_most_likely('?', 'neighbor', 'austria', candidates=list(kb.entities), k=2))
 
 print(kb.estimate_triple_prob('fiji', 'locatedin', 'melanesia'))
 
