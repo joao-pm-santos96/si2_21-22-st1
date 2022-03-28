@@ -22,3 +22,8 @@ sudo apt install redis-server
 ```
 
 Or, instead, use ```pip install -r requirements.txt```.
+
+## Run
+
+Terminal 1: ```python -m zincbase.web --redis 127.0.0.1:6379```
+Terminal 2: ```python countries.py```

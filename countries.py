@@ -6,25 +6,26 @@ import torch
 torch.cuda.is_available()
 
 if __name__ == '__main__': 
+ 
     kb = KB()
-    g = GraphCaster()
+    g = GraphCaster(redis_address='redis://127.0.0.1:6379')
     g.reset()
 
     kb.from_csv('./countries_train.csv', delimiter='\t')
 
-    print('The neighboors of Slovakia are:')
+    print('-> The neighboors of Slovakia are:')
     for ans in kb.query('neighbor(slovakia, Country)'):
         print(ans['Country'])
 
     kb.store('capitalofneighor(Z, X) :- neighbor(X, Y), capitalof(Z, Y)')
 
     print()
-    print('capitalofneighor(madrid, Country)')
+    print('-> capitalofneighor(madrid, Country)')
     for ans in kb.query('capitalofneighor(madrid, Country)'):
         print(ans)
 
     print()
-    print('capitalofneighor(City, germany)')
+    print('-> capitalofneighor(City, germany)')
     for ans in kb.query('capitalofneighor(City, germany)'):
         print(ans)
 
@@ -37,20 +38,16 @@ if __name__ == '__main__':
 
     print(kb.estimate_triple_prob('fiji', 'locatedin', 'melanesia'))
 
+    g.from_kb(kb)
+    g.render(arrow_size=2,
+         node_opacity=1, 
+         node_label='id',
+         label_node=True,
+         edge_label='pred',
+         label_edge=True, 
+         label_edge_offset=1,
+         bg_color='rgba(255,255,255,1)')
 
-    # exit()
-
-    # g.from_kb(kb)
-    # g.render(node_color='node => node.color',
-    #         arrow_size=2,
-    #         node_opacity=1, node_label='color',
-    #         label_node=True,
-    #         edge_label='edge_attr',
-    #         label_edge=True, label_edge_offset=1,
-    #         bg_color='rgba(255,255,255,1)')
-
-
-    # while True:
-    #     time.sleep(1)
-    #     g.batch_update()
-
+    print('Zincbase Graph Ready')
+    while True:
+        time.sleep(1)
