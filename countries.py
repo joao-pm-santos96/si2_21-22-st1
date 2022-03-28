@@ -18,16 +18,16 @@ if __name__ == '__main__':
     for ans in kb.query('neighbor(slovakia, Country)'):
         print(ans['Country'])
     # python code
-    kb.store('capitalofneighor(Z, X) :- neighbor(X, Y), capitalof(Z, Y)') # prolog function
+    kb.store('capitalofneighbor(Z, X) :- neighbor(X, Y), capitalof(Z, Y)') # prolog function
 
     print()
-    print('-> capitalofneighor(madrid, Country)')
-    for ans in kb.query('capitalofneighor(madrid, Country)'):
+    print('-> capitalofneighbor(madrid, Country)')
+    for ans in kb.query('capitalofneighbor(madrid, Country)'):
         print(ans)
 
     print()
-    print('-> capitalofneighor(City, germany)')
-    for ans in kb.query('capitalofneighor(City, germany)'):
+    print('-> capitalofneighbor(City, germany)')
+    for ans in kb.query('capitalofneighbor(City, germany)'):
         print(ans)
 
     kb.build_kg_model(cuda=False, embedding_size=40)
