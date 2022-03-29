@@ -50,6 +50,26 @@ if __name__ == '__main__':
         print(ans)
 
 
+    #kb.store('capofneiEUbathedby(Z, X, O) :- neighbor(X, Y), partofEU(Y), bathedby(Y,O), capitalof(Z, Y)') # prolog function
+    
+    kb.store('countriesofcontbathedby(Z, X, O) :- locatedin(Z, X), bathedby(Z, O)') # prolog function
+    
+    print('\n-> countriesofcontbathedby(Country, western_europe, atlantic_ocean)')
+    for ans in kb.query('countriesofcontbathedby(Country, western_europe, atlantic_ocean)'):
+        print(ans)
+    
+    print('\n-> countriesofcontbathedby(Country, southern_europe, atlantic_ocean)')
+    for ans in kb.query('countriesofcontbathedby(Country, southern_europe, atlantic_ocean)'):
+        print(ans)
+
+    
+    kb.store('bathedby2(Z, O1, O2) :- bathedby(Z, O1), bathedby(Z, O2)') # prolog function
+    
+    print('\n-> bathedby2(Country, atlantic_ocean, pacific_ocean)')
+    for ans in kb.query('bathedby2(Country, atlantic_ocean, pacific_ocean)'):
+        print(ans)
+
+
 
     kb.build_kg_model(cuda=False, embedding_size=40)
     kb.train_kg_model(steps=4000, batch_size=1, verbose=True)
