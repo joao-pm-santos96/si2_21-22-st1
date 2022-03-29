@@ -27,3 +27,7 @@ Or, instead, use ```pip install -r requirements.txt```.
 
 Terminal 1: ```python -m zincbase.web --redis 127.0.0.1:6379```
 Terminal 2: ```python countries.py```
+
+## Presentation Link
+
+https://docs.google.com/presentation/d/1ZE3iwJVMJVTg6sMaz4lzxNOUHkkIKonEdDc_KV8YQZk/edit?usp=sharing
