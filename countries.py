@@ -13,22 +13,43 @@ if __name__ == '__main__':
 
     kb.from_csv('./countries_train.csv', delimiter='\t')
 
+    eu_contries = ['austria', 'belgium', 'bulgaria', 'croatia', 'republic_of_cyprus', 'czech_republic', 'denmark', 'estonia', 'finland', 'france', 'germany', 'greece', 'hungary', 'ireland', 'italy', 'latvia', 'lithuania', 'luxembourg', 'malta', 'netherlands', 'poland', 'portugal', 'romania', 'slovakia', 'slovenia', 'spain', 'sweden']
+    for country in eu_contries:
+        kb.store('partofEU('+ country +')')
 
-    print('-> The neighboors of Slovakia are:')
+    print('\n-> European Union cuntries are:')
+    for ans in kb.query('partofEU(Country)'):
+        print(ans['Country']) # prints 'portugal' and 'spain
+
+    print('\n-> The neighboors of Slovakia are:')
     for ans in kb.query('neighbor(slovakia, Country)'):
         print(ans['Country'])
+    
+    
     # python code
     kb.store('capitalofneighbor(Z, X) :- neighbor(X, Y), capitalof(Z, Y)') # prolog function
 
-    print()
-    print('-> capitalofneighbor(madrid, Country)')
+    print('\n-> capitalofneighbor(madrid, Country)')
     for ans in kb.query('capitalofneighbor(madrid, Country)'):
         print(ans)
 
-    print()
-    print('-> capitalofneighbor(City, germany)')
+    print('\n-> capitalofneighbor(City, germany)')
     for ans in kb.query('capitalofneighbor(City, germany)'):
         print(ans)
+
+    
+    
+    kb.store('capitalofneighborEU(Z, X) :- neighbor(X, Y), partofEU(Y), capitalof(Z, Y)') # prolog function
+
+    print('\n-> capitalofneighbor(City, finland)')
+    for ans in kb.query('capitalofneighbor(City, finland)'):
+        print(ans)
+
+    print('\n-> capitalofneighborEU(City, finland)')
+    for ans in kb.query('capitalofneighborEU(City, finland)'):
+        print(ans)
+
+
 
     kb.build_kg_model(cuda=False, embedding_size=40)
     kb.train_kg_model(steps=4000, batch_size=1, verbose=True)
