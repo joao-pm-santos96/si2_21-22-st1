@@ -71,12 +71,12 @@ if __name__ == '__main__':
 
 
 
-    kb.build_kg_model(cuda=False, embedding_size=40)
-    kb.train_kg_model(steps=4000, batch_size=1, verbose=True)
+    # kb.build_kg_model(cuda=False, embedding_size=40)
+    # kb.train_kg_model(steps=4000, batch_size=1, verbose=True)
 
-    print(kb.get_most_likely('austria', 'neighbor', '?', k=2)) 
-    print(kb.get_most_likely('?', 'neighbor', 'austria', candidates=list(kb.entities), k=2))
-    print(kb.estimate_triple_prob('fiji', 'locatedin', 'melanesia'))
+    # print(kb.get_most_likely('austria', 'neighbor', '?', k=2)) 
+    # print(kb.get_most_likely('?', 'neighbor', 'austria', candidates=list(kb.entities), k=2))
+    # print(kb.estimate_triple_prob('fiji', 'locatedin', 'melanesia'))
 
     g.from_kb(kb)
     g.render(arrow_size=2,
